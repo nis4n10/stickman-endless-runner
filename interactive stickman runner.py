@@ -81,7 +81,7 @@ class Stickman:
 
     def draw(self, surf):
         # Head
-        pygame.draw.circle(surf, BLACK, (int(self.x), int(self.y- self.height)), 10)
+        pygame.draw.circle(surf, BLACK, (int(self.x), int(self.y - self.height)), 10)
         # Body
         pygame.draw.line(surf, BLACK, (self.x, self.y - self.height + 10), (self.x, self.y - 10), 4)
         # Arms
@@ -132,10 +132,16 @@ def game_loop():
     game_over = False
 
     while True:
-        screen.fill(WHITE)
-        pygame.draw.rect(screen, GREEN, (0, ground_y, WIDTH, HEIGHT - ground_y))
+        # -----------------------------
+        # Background
+        # -----------------------------
+        screen.fill((135, 206, 235))  # Sky blue
+        pygame.draw.circle(screen, (255, 223, 0), (700, 80), 50)  # Sun
+        pygame.draw.rect(screen, GREEN, (0, ground_y, WIDTH, HEIGHT - ground_y))  # Ground
 
-        # Event handling
+        # -----------------------------
+        # Event Handling
+        # -----------------------------
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -151,17 +157,23 @@ def game_loop():
                     pygame.quit()
                     sys.exit()
 
-        # Update stickman
+        # -----------------------------
+        # Update Stickman
+        # -----------------------------
         if not game_over:
             stickman.update()
 
-        # Spawn obstacles
+        # -----------------------------
+        # Spawn Obstacles
+        # -----------------------------
         obstacle_timer += 1
         if obstacle_timer > 60:
             obstacles.append(Obstacle())
             obstacle_timer = 0
 
-        # Update and draw obstacles
+        # -----------------------------
+        # Update Obstacles
+        # -----------------------------
         for obs in obstacles[:]:
             if not game_over:
                 obs.update(speed)
@@ -171,18 +183,22 @@ def game_loop():
             if obs.x + obs.width < 0:
                 obstacles.remove(obs)
 
-        # Draw stickman
+        # -----------------------------
+        # Draw Stickman
+        # -----------------------------
         stickman.draw(screen)
 
-        # Update score
+        # -----------------------------
+        # Update Score
+        # -----------------------------
         if not game_over:
             score += 1
-
-        # Display score
         score_text = font.render(f"Score: {score}", True, BLACK)
-        screen.blit(score_text, (10,10))
+        screen.blit(score_text, (10, 10))
 
-        # Game over screen
+        # -----------------------------
+        # Game Over Screen
+        # -----------------------------
         if game_over:
             over_text = font.render("Game Over!", True, BLACK)
             screen.blit(over_text, (WIDTH//2 - over_text.get_width()//2, HEIGHT//2 - 60))
@@ -196,9 +212,13 @@ def game_loop():
 # Main Menu Loop
 # -----------------------------
 while True:
-    screen.fill(WHITE)
+    screen.fill((135, 206, 235))  # Sky blue
+    pygame.draw.circle(screen, (255, 223, 0), (700, 80), 50)  # Sun
+    pygame.draw.rect(screen, GREEN, (0, ground_y, WIDTH, HEIGHT - ground_y))  # Ground
+
     title = font.render("Stickman Endless Runner", True, BLACK)
     screen.blit(title, (WIDTH//2 - title.get_width()//2, HEIGHT//2 - 100))
+
     start_button.draw(screen)
     quit_button.draw(screen)
     pygame.display.update()
