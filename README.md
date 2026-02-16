@@ -56,12 +56,7 @@ Score increases continuously based on survival time.
 
 Game ends when stickman collides with an obstacle, showing Restart and Quit buttons.
 
-📂 Project Structure
-stickman-endless-runner/
-│
-├─ stickman_runner.py      # Main Python game file
-├─ README.md               # Project README
-└─ screenshot.png          # Optional: screenshot of gameplay
+
 
 🌟 Future Enhancements
 
@@ -76,5 +71,6 @@ Collision particle effects
 Sound effects for jumps and collisions
 
 ⚖ License
+
 
 This project is licensed under the MIT License – see the LICENSE file for details.
